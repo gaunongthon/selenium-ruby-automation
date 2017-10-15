@@ -1,0 +1,15 @@
+How to set up:
+
+gem install selenium-cucumber
+gem install syntax
+
+Update ~/.profile with
+
+PATH="/home/michaelho/Downloads/automation/webdrivers:$PATH"
+PATH="/home/michaelho/Downloads/automation/ansi160:$PATH"
+PATH="/home/michaelho/Downloads/automation/SublimeText2:$PATH"
+
+Run with
+cucumber BROWSER=ff
+cucumber –f html –o result.html
+cucumber features/feature_name.feature
