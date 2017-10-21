@@ -1,0 +1,18 @@
+1.How to set up:
+
+bundle install
+
+2.Web drivers setting up (Ubuntu):
+Update ~/.profile with
+PATH="/home/michaelho/Downloads/automation/webdrivers:$PATH"
+PATH="/home/michaelho/Downloads/automation/ansi160:$PATH"
+PATH="/home/michaelho/Downloads/automation/SublimeText2:$PATH"
+
+3. Execute command lines
+cucumber (run all features on default env against default browser but not features with @skip)
+cucumber -p wip (only run @wip on default env against default browser)
+cucumber -p dev (run all features on dev env against default browser but not features with @skip)
+cucumber -p chrome (run all features on default env against chrome browser but not features with @skip)
+cucumber features/feature_name.feature (run feature_name.feature on default env against default browser but not features with @skip)
+cucumber features/feature_name.feature -p stage -p ff (run feature_name.feature on stage env against ff browser but not features with @skip)
+

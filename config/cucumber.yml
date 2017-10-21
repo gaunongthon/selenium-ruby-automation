@@ -1,1 +1,8 @@
-default: --format html --out reports/results.html --format pretty --color --no-source
+default: --format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip'
+<% common = "--format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip'" %>
+<% wip = "--tags @wip" %>
+ff: <%= common %> BROWSER=firefox
+chrome: <%= common %> BROWSER=chrome
+stage: <%= common %> ENVIRONMENT=stage
+dev: <%= common %> ENVIRONMENT=dev
+wip: <%= wip %>

@@ -19,6 +19,14 @@ module UtilFunctions
       end
   end
 
+  def mouseOver(element)
+    element.fire_event "onmouseover"
+  end
+
+  def scrollElementToCenter(element)
+    element.scroll.to :center
+  end
+
   def sendKeys(element, text)
       wait_for_transition(element)
       element.send_keys text
@@ -26,6 +34,17 @@ module UtilFunctions
 
   def clickElement(element)
       wait_for_transition(element)
+      element.click
+      sleep(WAIT_DEFAULT)
+  end
+
+  def doubleClickElement(element)
+    wait_for_transition(element)
+    element.double_click
+    sleep(WAIT_DEFAULT)
+  end
+
+  def clickElementNoWait(element)
       element.click
   end
 
@@ -38,5 +57,6 @@ module UtilFunctions
 
   def go(browser, url)
     browser.goto url
+    sleep(WAIT_DEFAULT)
   end
 end
