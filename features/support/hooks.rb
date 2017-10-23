@@ -1,11 +1,17 @@
 require 'selenium-cucumber'
 require_all 'lib'
+require 'headless'
 #Cucumber provides a number of hooks which allow us to run blocks at various points in the Cucumber test cycle
+
+if ENV['BROWSER'].eql? 'headless'
+  $browser_type =  "firefox"
+  headless = Headless.new
+  headless.start
+end
 
 Before do
   @env = ENV['ENVIRONMENT'] || 'default'
-  $browser_type =  ENV['BROWSER'] || 'firefox'
-  puts "Loading environment `#{@env}` and browser `#{@browser_type}`"
+  puts "Loading environment `#{@env}` and browser `#{$browser_type}`"
   @env_info = YAML.load(File.open(File.join(Dir.pwd, 'config', 'env.yml')))
 
   @browser = Watir::Browser.new :"#{$browser_type}"
@@ -27,9 +33,17 @@ end
 
 After do |scenario|
   if scenario.failed?
-    @browser.screenshot.save("reports/"+scenario.name+".jpeg")
-    embed("reports/"+scenario.name+".jpeg", 'image/jpeg')
+    if $browser_type.eql? 'headless'
+      @browser.send_keys :f12
+      headless.take_screenshot.save("reports/"+scenario.name+".png")
+      embed("reports/"+scenario.name+".png", 'image/png')
+    else
+    @browser.send_keys :f12
+    @browser.screenshot.save("reports/"+scenario.name+".png")
+    embed("reports/"+scenario.name+".png", 'image/png')
+    end
   end
+  headless.destroy
   @browser.close
 end
 

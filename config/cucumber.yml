@@ -3,6 +3,7 @@ default: --format html --out reports/results.html --format pretty --color --no-s
 <% wip = "--tags @wip" %>
 ff: <%= common %> BROWSER=firefox
 chrome: <%= common %> BROWSER=chrome
+headless: <%= common %> BROWSER=headless
 stage: <%= common %> ENVIRONMENT=stage
 dev: <%= common %> ENVIRONMENT=dev
 wip: <%= wip %>
