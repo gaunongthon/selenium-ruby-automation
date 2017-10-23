@@ -1,4 +1,4 @@
-default: --format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip'
+default: --format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip' --format json --out reports.json
 <% common = "--format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip'" %>
 <% wip = "--tags @wip" %>
 ff: <%= common %> BROWSER=firefox
