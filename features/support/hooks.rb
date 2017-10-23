@@ -33,7 +33,7 @@ end
 
 After do |scenario|
   if scenario.failed?
-    if $browser_type.eql? 'headless'
+    if  ENV['BROWSER'].eql? 'headless'
       @browser.send_keys :f12
       headless.take_screenshot.save("reports/"+scenario.name+".png")
       embed("reports/"+scenario.name+".png", 'image/png')
