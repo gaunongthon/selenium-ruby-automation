@@ -7,6 +7,8 @@ if ENV['BROWSER'].eql? 'headless'
   $browser_type =  "firefox"
   headless = Headless.new
   headless.start
+else
+  $browser_type = ENV['BROWSER']
 end
 
 Before do
@@ -33,17 +35,17 @@ end
 
 After do |scenario|
   if scenario.failed?
-    if  ENV['BROWSER'].eql? 'headless'
+    if $browser_type.eql? 'headless'
       @browser.send_keys :f12
       headless.take_screenshot.save("reports/"+scenario.name+".png")
       embed("reports/"+scenario.name+".png", 'image/png')
+      headless.destroy
     else
     @browser.send_keys :f12
     @browser.screenshot.save("reports/"+scenario.name+".png")
     embed("reports/"+scenario.name+".png", 'image/png')
     end
   end
-  headless.destroy
   @browser.close
 end
 

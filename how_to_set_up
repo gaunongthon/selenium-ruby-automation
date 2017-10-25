@@ -16,3 +16,24 @@ cucumber -p chrome (run all features on default env against chrome browser but n
 cucumber features/feature_name.feature (run feature_name.feature on default env against default browser but not features with @skip)
 cucumber features/feature_name.feature -p stage -p ff (run feature_name.feature on stage env against ff browser but not features with @skip)
 
+Jenkins
+#!/bin/bash
+set -e
+
+account_id=937717965877
+branch_name=$(basename $GIT_BRANCH)
+region=us-east-1
+
+# Setup python virtualenv
+virtualenv venv
+source venv/bin/activate
+python setup.py install
+
+#Dependencies needed by serverless
+npm install
+
+if [ $branch_name == "master" ] ; then
+  stage=uat
+else
+  stage=${branch_name//release_/}
+fi
