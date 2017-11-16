@@ -23,7 +23,7 @@ Before do
 
   if (ENV['PLATFORM'].eql? 'browserstack1')
     browserstackOptions = @env_info[ENV['PLATFORM']]
-    url = "http://#{browserstackOptions['BS_USERNAME']}:#{browserstackOptions['BS_AUTHKEY']}@hub.browserstackOptions.com/wd/hub"
+    url = "http://#{browserstackOptions['BS_USERNAME']}:#{browserstackOptions['BS_AUTHKEY']}@hub.browserstack.com/wd/hub"
     capabilities = Selenium::WebDriver::Remote::Capabilities.new
     if browserstackOptions['BS_AUTOMATE_OS']
       capabilities['os'] = browserstackOptions['BS_AUTOMATE_OS']
