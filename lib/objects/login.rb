@@ -3,10 +3,10 @@ class Login
   include Nokogiri
 
   def initialize(browser=nil)
-    @username = browser.element(:id => "username")
-    @password = browser.element(:id => "password")
-    @login_page_welcome_text = browser.element(:css => ".loginTitle")
-    @login_btn = browser.element(:css => ".btn")
+    @username = browser.element(:id => "email")
+    @password = browser.element(:id => "passwd")
+    @login_page_welcome_text = browser.element(:css => "#login_form > h3")
+    @login_btn = browser.element(:id => "SubmitLogin")
     @b = browser
     create_getters
   end

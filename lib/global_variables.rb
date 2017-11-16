@@ -1,8 +1,6 @@
 module GlobalContants
-    LOGIN_WELCOME_TEXT = "Login"
-    HOME_PAGE_WELCOME_TEXT = "Manage Your Fleet."
-    SETTINGS_PAGE_TEXT = "Account Settings"
-    USERS_PAGE_TEXT = "Manage Your Drivers."
-    CLAIM_PAGE_TEXT = "Status"
-    WAIT_DEFAULT = 3
+      LOGIN_WELCOME_TEXT = "ALREADY REGISTERED?"
+      HOME_PAGE_WELCOME_TEXT = "MY ACCOUNT"
+      HOME_PAGE_CONTACT_TEXT = "CUSTOMER SERVICE - CONTACT US"
+      WAIT_DEFAULT = 3
 end

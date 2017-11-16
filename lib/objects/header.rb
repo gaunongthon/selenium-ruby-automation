@@ -3,14 +3,9 @@ class Header
   include Nokogiri
 
   def initialize(browser=nil)
-    @dashboard = browser.a(:href => "/dashboard")
-    @driver_map = browser.a(:href => "/driver-map")
-    @user_management = browser.a(:href => "/user-management")
-    @promotions = browser.a(:href => "/promotions")
-    @claims = browser.a(:href => "/claims")
-    @payments = browser.a(:href => "/payments")
-    @settings = browser.a(:href => "/settings")
-    @logout = browser.a(:href => "/logout")
+    @logout = browser.a(:css => ".logout")
+    @contact_us = browser.a(:css => "#contact-link > a")
+    @myaccount = browser.a(:css => ".account")
     @b = browser
     create_getters
   end
@@ -20,28 +15,13 @@ class Header
     wait_for_page_to_complete
   end
 
-  def loadHome
-    clickElement(@dashboard)
+  def clickContactUs
+    clickElement(@contact_us)
     wait_for_page_to_complete
   end
 
-  def loadClaims
-    clickElement(@claims)
-    wait_for_page_to_complete
-  end
-
-  def loadSettings
-    clickElement(@settings)
-    wait_for_page_to_complete
-  end
-
-  def loadPayments
-    clickElement(@payments)
-    wait_for_page_to_complete
-  end
-
-  def loadUsers
-    clickElement(@user_management)
+  def clickMyAccount
+    clickElement(@myaccount)
     wait_for_page_to_complete
   end
 
