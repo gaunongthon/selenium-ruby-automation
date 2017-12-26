@@ -47,36 +47,33 @@ rvm gemset delete bfa_ui_test
 
 `cucumber -p headless`
 
-* To run all test cases (feature files) on Browserstack platform
-
-`cucumber -p bs`
-
 * To run all test cases (feature files) on real Firefox browser
 
 `cucumber -p ff`
+
+* To on Browserstack platform
+```
+cucumber -p bs_ff //Latest Firefox on Windows 10
+cucumber -p bs_ie  //Latest IE on Windows 10
+cucumber -p bs_chrome //Latest Chrome on Windows 10
+cucumber -p bs_edge //Latest Edge on Windows 10
+cucumber -p bs_ipad //Latest Safari on iPad 5th iOS 11.x
+cucumber -p bs_iphone8 //Latest Safari on iPhone 8 iOS 11.x
+cucumber -p bs_iphone7plus //Latest Safari on iPhone 7plus iOS 10.x
+cucumber -p bs_s8plus //Native browser on Samsung Galaxy S8 plus Android 7.x
+cucumber -p bs_s6 //Native browser on Samsung Galaxy S6 Android 5.x
+```
 
 ### More options to run test cases ###
 
 only run @wip on default env against default browser
 
-`cucumber -p wip`
+`cucumber -p wip -p ff`
 
 run feature_name.feature on default env against default browser but not features with @skip
 
-`cucumber features/feature_name.feature`
+`cucumber -p headless features/feature_name.feature`
 
-run feature_name.feature on stage env against ff browser but not features with @skip
+run feature_name.feature on default env against ff browser but not features with @skip
 
-`cucumber features/feature_name.feature -p stage -p ff`
-
-run multiple envs
-```
-cucumber -p bs_ff
-cucumber -p bs_ie
-cucumber -p bs_chrome
-cucumber -p bs_edge
-cucumber -p bs_ipad
-cucumber -p bs_iphone5s
-cucumber -p bs_iphone6
-
-```
+`cucumber features/feature_name.feature -p ff`
