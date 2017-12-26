@@ -1,6 +1,5 @@
 Feature: Automation Practice Smoke test
 
-	@login_logout_testing
 	Scenario Outline: Smoke test
 		And I am at Automation Practice Login Page
 		And I log in Automation Practice

@@ -2,44 +2,59 @@ require 'selenium-cucumber'
 require_all 'lib'
 
 #Cucumber provides a number of hooks which allow us to run blocks at various points in the Cucumber test cycle
-
-if ENV['BROWSER'].eql? 'headless'
-  require 'headless'
-  puts "Starting headless"
-  $browser_type =  "firefox"
-  headless = Headless.new
-  headless.start
-  at_exit do
-      puts "Destroying headless"
-      headless.destroy
-  end
-else
-  $browser_type = ENV['BROWSER']
-end
-
 Before do
   @env = ENV['ENVIRONMENT'] || 'dev'
   @env_info = YAML.load(File.open(File.join(Dir.pwd, 'config', 'env.yml')))
+  platform = ENV['PLATFORM'] || 'headless'
+  puts "\nPlatform: #{platform}"
+  puts "Environment: #{@env}"
+  browserstackOptions = @env_info[platform]
 
-  if (ENV['PLATFORM'].eql? 'browserstack1')
-    browserstackOptions = @env_info[ENV['PLATFORM']]
+  # See: https://www.browserstack.com/automate/node#setting-os-and-browser
+  if ((platform.include? 'browserstack_device')) ## For iOS-based and android-based browsers
     url = "http://#{browserstackOptions['BS_USERNAME']}:#{browserstackOptions['BS_AUTHKEY']}@hub.browserstack.com/wd/hub"
     capabilities = Selenium::WebDriver::Remote::Capabilities.new
-    if browserstackOptions['BS_AUTOMATE_OS']
-      capabilities['os'] = browserstackOptions['BS_AUTOMATE_OS']
-      capabilities['os_version'] = browserstackOptions['BS_AUTOMATE_OS_VERSION']
-    else
-      capabilities['platform'] = browserstackOptions['SELENIUM_PLATFORM'] || 'ANY'
-    end
-    capabilities['browser'] = browserstackOptions['SELENIUM_BROWSER'] || 'chrome'
-    capabilities['browser_version'] = browserstackOptions['SELENIUM_VERSION'] if browserstackOptions['SELENIUM_VERSION']
-
+    capabilities['realMobile'] = browserstackOptions['realMobile']
+    capabilities['device'] = browserstackOptions['device']
+    capabilities['os_version'] = browserstackOptions['os_version']
     @browser = Watir::Browser.new(:remote,
       :url => url,
       :desired_capabilities => capabilities)
-  else
+  elsif ((platform.include? 'browserstack') && (!platform.include? 'device')) # For windows-based browsers
+    url = "http://#{browserstackOptions['BS_USERNAME']}:#{browserstackOptions['BS_AUTHKEY']}@hub.browserstack.com/wd/hub"
+    capabilities = Selenium::WebDriver::Remote::Capabilities.new
+    capabilities['os'] = browserstackOptions['os']
+    capabilities['os_version'] = browserstackOptions['os_version']
+    capabilities['browserName'] = browserstackOptions['browserName']
+    capabilities['browser_version'] = browserstackOptions['browser_version']
+    @browser = Watir::Browser.new(:remote,
+      :url => url,
+      :desired_capabilities => capabilities)
+  elsif ENV['BROWSER'].eql? 'headless'# For headless mode
+    require 'headless'
+    puts "Starting headless"
+    $browser_type = "firefox"
+    headless = Headless.new
+    headless.start
+    @browser = Watir::Browser.new :"#{$browser_type}"
+    at_exit do
+        puts "Destroying headless"
+        headless.destroy
+    end
+  elsif ENV['BROWSER'].eql? 'firefox'# For gecko firefox
+    $browser_type = ENV['BROWSER']
     @browser = Watir::Browser.new :"#{$browser_type}"
   end
+
+  #Loading env settings into global variables
+  selected_env_info = @env_info[@env]
+  @url = selected_env_info['url']
+  @usr_name = selected_env_info['usr']
+  @pwd = selected_env_info['pwd']
+
+  puts @url
+  puts @usr_name
+  puts @pwd
 
   #All page-objects initialization here
   @login = Login.new(@browser)
@@ -47,12 +62,13 @@ Before do
   @home = Home.new(@browser)
 end
 
-Before ('@login_logout_testing') do
+Before ('not @auto_login_logout') do
   @login.loadAUT(@env_info, @env)
 end
 
-Before ('not @login_logout_testing') do
-@login.login(@env_info, @env)
+Before ('@auto_login_logout') do
+  @login.loadAUT(@env_info, @env)
+  @login.login(@env_info, @env)
 end
 
 #You could also enable to browser to full screen
@@ -71,11 +87,11 @@ After do |scenario|
   @browser.close
 end
 
-After 'not @login_logout_testing' do
+After '@auto_login_logout' do
 @header.logOut
 @browser.close
 end
 
-After '@login_logout_testing' do
+After 'not @auto_login_logout' do
   @browser.close
 end

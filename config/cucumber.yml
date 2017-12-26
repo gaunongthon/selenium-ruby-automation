@@ -1,8 +1,16 @@
 default: --format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip'
-<% common = "--format json --out reports/reports.json --format pretty --color --no-source --tags 'not @skip'" %>
+<% common = "--format html --out reports/results.html --format json --out reports/reports.json --format pretty --color --no-source --tags 'not @skip'" %>
 <% wip = "--format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip' --tags @wip" %>
 wip: <%= wip %>
 ff: <%= common %> BROWSER=firefox
 headless: <%= common %> BROWSER=headless
-dev: <%= common %> ENVIRONMENT=dev
 bs: <%= common %> PLATFORM=browserstack1
+bs_ie: <%= common %> PLATFORM=browserstackie
+bs_edge: <%= common %> PLATFORM=browserstackedge
+bs_ff: <%= common %> PLATFORM=browserstackff
+bs_chrome: <%= common %> PLATFORM=browserstackchrome
+bs_ipad: <%= common %> PLATFORM=browserstack_device_ipad
+bs_iphone8: <%= common %> PLATFORM=browserstack_device_iphone8
+bs_iphone7plus: <%= common %> PLATFORM=browserstack_device_iphone7plus
+bs_s6: <%= common %> PLATFORM=browserstack_device_s6
+bs_s8plus: <%= common %> PLATFORM=browserstack_device_s8plus

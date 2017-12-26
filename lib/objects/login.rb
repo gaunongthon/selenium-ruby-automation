@@ -14,7 +14,6 @@ class Login
   def loadAUT(env_info, env)
     stage_info = env_info[env]
     go(@b, stage_info['url'])
-    wait_for_page_to_complete
   end
 
   def login(env_info, env)
@@ -25,10 +24,4 @@ class Login
     clickElement(@login_btn)
   end
 
-  private
-  def wait_for_page_to_complete(timeout = 20)
-    FirePoll.poll("Page was not loaded", timeout) do
-      @b.execute_script("return document.readyState;") == "complete"
-    end
-  end
 end

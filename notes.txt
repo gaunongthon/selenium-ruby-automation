@@ -22,6 +22,8 @@ cucumber features/feature_name.feature -p stage -p ff (run feature_name.feature 
 
 5. Jenkins:
 http://gillesfabio.com/blog/2011/03/01/rvm-for-pythonistas-virtualenv-for-rubyists/
+https://www.blazemeter.com/blog/headless-execution-selenium-tests-jenkins
+https://dzone.com/articles/run-headless-selenium-tests-from-jenkins
 #!/bin/bash
 
 #dependencies needed for automated test
