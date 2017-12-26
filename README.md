@@ -25,8 +25,8 @@ Check ruby version
 Create a gemset (Where virtualenv has “environments”, RVM has “gemsets”)
 ```
 rvm use 2.3.1
-rvm gemset create bfa_ui_test
-rvm gemset use bfa_ui_test
+rvm gemset create selenium_ui_test
+rvm gemset use selenium_ui_test
 ```
 
 Install dependencies
@@ -37,8 +37,8 @@ bundle install
 
 Only run these commands to clean up your gemset (virtual environment for ruby)
 ```
-rvm gemset empty bfa_ui_test
-rvm gemset delete bfa_ui_test
+rvm gemset empty selenium_ui_test
+rvm gemset delete selenium_ui_test
 ```
 
 ### How do I execute test? ###
