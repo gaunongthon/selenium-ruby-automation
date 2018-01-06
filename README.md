@@ -8,7 +8,7 @@ This repository is used for automated smoke test and functional test of web appl
 
 ### How do I get set up? ###
 
-* Create virtual env for installing all dependencies
+Create virtual env for installing all dependencies
 
 Install rvm
 
@@ -43,15 +43,15 @@ rvm gemset delete selenium_ui_test
 
 ### How do I execute test? ###
 
-* To run all test cases (feature files) on headless Firefox mode
+To run all test cases (feature files) on headless Firefox mode
 
 `cucumber -p headless`
 
-* To run all test cases (feature files) on real Firefox browser
+To run all test cases (feature files) on real Firefox browser
 
 `cucumber -p ff`
 
-* To on Browserstack platform
+To on Browserstack platform
 ```
 cucumber -p bs_ff //Latest Firefox on Windows 10
 cucumber -p bs_ie  //Latest IE on Windows 10
@@ -77,3 +77,8 @@ run feature_name.feature on default env against default browser but not features
 run feature_name.feature on default env against ff browser but not features with @skip
 
 `cucumber features/feature_name.feature -p ff`
+
+### How do I view test report? ###
+```
+google-chrome mochawesome-report/mochawesome.html
+```
