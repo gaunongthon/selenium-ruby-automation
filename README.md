@@ -80,5 +80,5 @@ run feature_name.feature on default env against ff browser but not features with
 
 ### How do I view test report? ###
 ```
-google-chrome mochawesome-report/mochawesome.html
+google-chrome reports/results.html
 ```
