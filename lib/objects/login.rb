@@ -11,16 +11,13 @@ class Login
     create_getters
   end
 
-  def loadAUT(env_info, env)
-    stage_info = env_info[env]
-    go(@b, stage_info['url'])
+  def loadAUT(url)
+    go(@b, url)
   end
 
-  def login(env_info, env)
-    loadAUT(env_info, env)
-    stage_info = env_info[env]
-    sendKeys(@username, stage_info['usr'])
-    sendKeys(@password, stage_info['pwd'])
+  def login(usr, pwd)
+    sendKeys(@username, usr)
+    sendKeys(@password, pwd)
     clickElement(@login_btn)
   end
 

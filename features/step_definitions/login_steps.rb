@@ -9,7 +9,7 @@ Then(/I am at Automation Practice Login Page$/) do
 end
 
 Then(/I log in Automation Practice$/) do
-  @login.login(@env_info, @env)
+  @login.login(USER, PWD)
 end
 
 Then(/I am at Automation Practice Home Page$/) do
