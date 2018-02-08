@@ -47,7 +47,7 @@ elsif ((platform.include? 'browserstack') && (!platform.include? 'device')) # Fo
 elsif ENV['BROWSER'].eql? 'headless'# For headless mode
   require 'headless'
   puts "Starting headless"
-  $browser_type = "firefox"
+  $browser_type = "chrome"
   headless = Headless.new
   headless.start
   $browser = Watir::Browser.new :"#{$browser_type}"
@@ -55,7 +55,7 @@ elsif ENV['BROWSER'].eql? 'headless'# For headless mode
       puts "Destroying headless"
       headless.destroy
   end
-elsif ENV['BROWSER'].eql? 'firefox'# For gecko firefox
+elsif ((ENV['BROWSER'].eql? 'firefox') | (ENV['BROWSER'].eql? 'chrome'))# For gecko firefox or chrome
   $browser_type = ENV['BROWSER']
   $browser = Watir::Browser.new :"#{$browser_type}"
 end

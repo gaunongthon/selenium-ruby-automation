@@ -51,6 +51,10 @@ To run all test cases (feature files) on real Firefox browser
 
 `cucumber -p ff`
 
+To run all test cases (feature files) on real Chrome browser
+
+`cucumber -p chrome`
+
 To on Browserstack platform
 ```
 cucumber -p bs_ff //Latest Firefox on Windows 10

@@ -3,6 +3,7 @@ default: --format html --out reports/results.html --format pretty --color --no-s
 <% wip = "--format html --out reports/results.html --format pretty --color --no-source --tags 'not @skip' --tags @wip" %>
 wip: <%= wip %>
 ff: <%= common %> BROWSER=firefox
+chrome: <%= common %> BROWSER=chrome
 headless: <%= common %> BROWSER=headless
 bs: <%= common %> PLATFORM=browserstack1
 bs_ie: <%= common %> PLATFORM=browserstackie
