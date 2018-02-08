@@ -58,6 +58,7 @@ elsif ENV['BROWSER'].eql? 'headless'# For headless mode
 elsif ((ENV['BROWSER'].eql? 'firefox') | (ENV['BROWSER'].eql? 'chrome'))# For gecko firefox or chrome
   $browser_type = ENV['BROWSER']
   $browser = Watir::Browser.new :"#{$browser_type}"
+  $browser.driver.manage.window.maximize
 end
 
 #Loading env settings into global variables
