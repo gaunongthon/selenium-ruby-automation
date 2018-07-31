@@ -15,7 +15,7 @@ module UtilFunctions
   def wait_for_transition(element)
       element.wait_until_present
       FirePoll.poll('waited too long', 20) do
-        element.visible?
+        element.present?
       end
   end
 

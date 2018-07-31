@@ -1,3 +1,4 @@
+require_all 'lib'
 class Header
   include UtilFunctions
   include Nokogiri

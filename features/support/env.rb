@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '../../','lib'))
 
 require 'rubygems'
+require 'em/pure_ruby'
 require 'selenium-cucumber'
 require 'require_all'
 require 'fire_poll'
@@ -17,9 +18,9 @@ require_all 'lib'
 
 ENV['FRAMEWORK'] = File.expand_path('.')
 
-@env = ENV['ENVIRONMENT'] || 'dev'
+@env = ENV['ENVIRONMENT'] || 'qa'
 @env_info = YAML.load(File.open(File.join(Dir.pwd, 'config', 'env.yml')))
-platform = ENV['PLATFORM'] || 'headless'
+platform = ENV['PLATFORM'] || 'local'
 puts "\nPlatform: #{platform}"
 puts "Environment: #{@env}"
 browserstackOptions = @env_info[platform]

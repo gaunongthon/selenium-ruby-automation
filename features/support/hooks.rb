@@ -1,4 +1,5 @@
 require 'selenium-cucumber'
+require_all 'lib'
 
 #Cucumber provides a number of hooks which allow us to run blocks at various points in the Cucumber test cycle
 Before do

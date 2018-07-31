@@ -1,3 +1,4 @@
+require_all 'lib'
 class Login
   include UtilFunctions
   include Nokogiri

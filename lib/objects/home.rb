@@ -1,3 +1,4 @@
+require_all 'lib'
 class Home
   include UtilFunctions
   include Nokogiri
