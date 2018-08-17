@@ -59,4 +59,14 @@ module UtilFunctions
     browser.goto url
     sleep(WAIT_DEFAULT)
   end
+
+  # method to switch frame
+  def switch_iframe(iFrameId)
+    @browser.driver.switch_to.frame(iFrameId)
+  end
+
+  # method to switch to main window
+  def switch_to_main_content
+   @browser.driver.switch_to.default_content
+  end
 end
