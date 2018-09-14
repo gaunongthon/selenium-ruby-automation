@@ -11,8 +11,11 @@ This repository is used for automated smoke test and functional test of web appl
 Create virtual env for installing all dependencies
 
 Install rvm
-
-`sudo apt-get install rvm`
+```
+sudo apt-add-repository -y ppa:rael-gc/rvm
+sudo apt-get update
+sudo apt-get install rvm
+```
 
 Install ruby
 
