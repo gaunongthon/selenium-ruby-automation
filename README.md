@@ -75,16 +75,22 @@ google-chrome -version
 * Notes: See Chromedriver version vs Google-chrome version compatibility at http://chromedriver.chromium.org/downloads
 
 To run all test cases (feature files) on real Firefox browser
-`cucumber -p ff`
+```
+cucumber -p ff
+```
 
 To run all test cases (feature files) on real Chrome browser
-`cucumber -p chrome`
+```
+cucumber -p chrome
+```
 
 ### How do I execute test locally in headless mode? ###
 
 To run all test cases (feature files) on headless Firefox mode
-`sudo apt-get install xvfb`
-`cucumber -p headless`
+```
+sudo apt-get install xvfb
+cucumber -p headless
+```
 
 ### How do I execute test remotely on browserstack? ###
 
@@ -104,16 +110,19 @@ cucumber -p bs_s6 //Native browser on Samsung Galaxy S6 Android 5.x
 ### More options to run test cases ###
 
 only run @wip on default env against default browser
-
-`cucumber -p wip -p ff`
+```
+cucumber -p wip -p ff
+```
 
 run feature_name.feature on default env against default browser but not features with @skip
-
-`cucumber -p headless features/feature_name.feature`
+```
+cucumber -p headless features/feature_name.feature
+```
 
 run feature_name.feature on default env against ff browser but not features with @skip
-
-`cucumber features/feature_name.feature -p ff`
+```
+cucumber features/feature_name.feature -p ff
+```
 
 ### How do I view test report? ###
 ```
