@@ -72,7 +72,7 @@ Confirm `google-chrome` set-up by running:
 google-chrome -version
 ```
 
-* See Chromedriver version and Google-chrome version compatable at http://chromedriver.chromium.org/downloads
+* Notes: See Chromedriver version vs Google-chrome version compatibility at http://chromedriver.chromium.org/downloads
 
 To run all test cases (feature files) on real Firefox browser
 `cucumber -p ff`
