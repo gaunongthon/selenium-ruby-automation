@@ -52,16 +52,32 @@ Dowload web drivers on your machine.
 
 Include path_to_your_web_driver_folder in system path (See `cat ~/.profile` - Questions: please google).
 
-Confirm your set-up by running:
-`which chromedriver`
-`which geckodriver`
+Confirm `chromedriver` set-up by running:
+```
+which chromedriver
+chromedriver -version
+```
+
+Install google-chrome if not available 
+```
+mkdir ~/downloads
+cd ~/downloads
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i ./google-chrome*.deb
+sudo apt-get install -f
+```
+
+Confirm `google-chrome` set-up by running:
+```
+google-chrome -version
+```
+
+* See Chromedriver version and Google-chrome version compatable at http://chromedriver.chromium.org/downloads
 
 To run all test cases (feature files) on real Firefox browser
-
 `cucumber -p ff`
 
 To run all test cases (feature files) on real Chrome browser
-
 `cucumber -p chrome`
 
 ### How do I execute test locally in headless mode? ###
