@@ -44,11 +44,17 @@ rvm gemset empty selenium_ui_test
 rvm gemset delete selenium_ui_test
 ```
 
-### How do I execute test? ###
+### How do I execute test locally? ###
 
-To run all test cases (feature files) on headless Firefox mode
+Dowload web drivers on your machine.
+* Firefox: https://github.com/mozilla/geckodriver/releases/
+* Chrome: http://chromedriver.storage.googleapis.com/index.html
 
-`cucumber -p headless`
+Include path_to_your_web_driver_folder in system path (See `cat ~/.profile` - Questions: please google).
+
+Confirm your set-up by running:
+`which chromedriver`
+`which geckodriver`
 
 To run all test cases (feature files) on real Firefox browser
 
@@ -58,7 +64,15 @@ To run all test cases (feature files) on real Chrome browser
 
 `cucumber -p chrome`
 
-To on Browserstack platform
+### How do I execute test locally in headless mode? ###
+
+To run all test cases (feature files) on headless Firefox mode
+`sudo apt-get install xvfb`
+`cucumber -p headless`
+
+### How do I execute test remotely on browserstack? ###
+
+To run all test cases on Browserstack platform
 ```
 cucumber -p bs_ff //Latest Firefox on Windows 10
 cucumber -p bs_ie  //Latest IE on Windows 10
