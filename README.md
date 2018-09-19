@@ -50,7 +50,29 @@ Dowload web drivers on your machine.
 * Firefox: https://github.com/mozilla/geckodriver/releases/
 * Chrome: http://chromedriver.storage.googleapis.com/index.html
 
-Include path_to_your_web_driver_folder in system path (See `cat ~/.profile` - Questions: please google).
+Install chromedriver if not available 
+```
+mkdir ~/downloads
+cd ~/downloads
+wget https://chromedriver.storage.googleapis.com/2.42/chromedriver_linux64.zip
+sudo apt install unzip
+unzip chromedriver_linux64.zip
+```
+
+Update PATH
+```
+vim  ~/.bashrc
+```
+
+Add this line at the end:
+```
+export PATH="/home/michael/download/webdrivers:$PATH"
+```
+
+To make changes in `~/.bashrc` to take effect immediately, do:
+```
+source ~/.bashrc
+```
 
 Confirm `chromedriver` set-up by running:
 ```
@@ -60,8 +82,6 @@ chromedriver -version
 
 Install google-chrome if not available 
 ```
-mkdir ~/downloads
-cd ~/downloads
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i ./google-chrome*.deb
 sudo apt-get install -f
