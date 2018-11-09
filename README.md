@@ -19,7 +19,7 @@ sudo apt-get install rvm
 
 Install ruby
 
-`rvm install ruby --default`
+`sudo apt install ruby`
 
 Check ruby version
 
