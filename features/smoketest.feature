@@ -11,7 +11,5 @@ Feature: Automation Practice Smoke test
 
 		Examples:
 					| opt 		|
-					#|"Order history and details"	|
-					#|"My wishlists"|
-					#|"My credit slips"|
+					|"My credit slips"|
 					|"My addresses"|

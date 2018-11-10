@@ -1,40 +1,34 @@
 require 'selenium-cucumber'
 require_all 'lib'
 
-#Cucumber provides a number of hooks which allow us to run blocks at various points in the Cucumber test cycle
+# Do something before each scenario
 Before do
-    @env = ENV['ENVIRONMENT'] || 'qa'
-    @env_info = YAML.load(File.open(File.join(Dir.pwd, 'config', 'env.yml')))
-    platform = ENV['PLATFORM'] || 'local'
-    puts "\nPlatform: #{platform}"
-    puts "Environment: #{@env}"
-    browserstackOptions = @env_info[platform]
-
     # See: https://www.browserstack.com/automate/node#setting-os-and-browser
-    if ((platform.include? 'browserstack_device')) ## For iOS-based and android-based browsers
-      url = "http://#{browserstackOptions['BS_USERNAME']}:#{browserstackOptions['BS_AUTHKEY']}@hub.browserstack.com/wd/hub"
+    if (($platform.include? 'browserstack_device')) ## For iOS-based and android-based browsers
+      url = "http://#{$browserstackOptions['BS_USERNAME']}:#{$browserstackOptions['BS_AUTHKEY']}@hub.browserstack.com/wd/hub"
       capabilities = Selenium::WebDriver::Remote::Capabilities.new
-      capabilities['realMobile'] = browserstackOptions['realMobile']
-      capabilities['device'] = browserstackOptions['device']
-      capabilities['os_version'] = browserstackOptions['os_version']
+      capabilities['realMobile'] = $browserstackOptions['realMobile']
+      capabilities['device'] = $browserstackOptions['device']
+      capabilities['os_version'] = $browserstackOptions['os_version']
       $browser = Watir::Browser.new(:remote,
         :url => url,
         :desired_capabilities => capabilities)
-    elsif ((platform.include? 'browserstack') && (!platform.include? 'device')) # For windows-based browsers
-      url = "http://#{browserstackOptions['BS_USERNAME']}:#{browserstackOptions['BS_AUTHKEY']}@hub.browserstack.com/wd/hub"
+    elsif (($platform.include? 'browserstack') && (!$platform.include? 'device')) # For windows-based browsers
+      url = "http://#{$browserstackOptions['BS_USERNAME']}:#{$browserstackOptions['BS_AUTHKEY']}@hub.browserstack.com/wd/hub"
       capabilities = Selenium::WebDriver::Remote::Capabilities.new
-      capabilities['os'] = browserstackOptions['os']
-      capabilities['os_version'] = browserstackOptions['os_version']
-      capabilities['browserName'] = browserstackOptions['browserName']
-      capabilities['browser_version'] = browserstackOptions['browser_version']
+      capabilities['os'] = $browserstackOptions['os']
+      capabilities['os_version'] = $browserstackOptions['os_version']
+      capabilities['browserName'] = $browserstackOptions['browserName']
+      capabilities['browser_version'] = $browserstackOptions['browser_version']
       $browser = Watir::Browser.new(:remote,
         :url => url,
         :desired_capabilities => capabilities)
     elsif ENV['BROWSER'].eql? 'headless'# For headless mode
       require 'headless'
       puts "Starting headless"
-      $browser_type = "chrome"
-      $browser = Watir::Browser.new :"#{$browser_type}", headless: true
+      options = Selenium::WebDriver::Chrome::Options.new
+      options.add_argument('--headless')
+      $browser = Watir::Browser.new :"chrome", options: options
     elsif ((ENV['BROWSER'].eql? 'firefox') | (ENV['BROWSER'].eql? 'chrome'))# For gecko firefox or chrome
       $browser_type = ENV['BROWSER']
       $browser = Watir::Browser.new :"#{$browser_type}"
@@ -43,21 +37,10 @@ Before do
     $browser.driver.manage.window.maximize
     $browser.driver.manage.delete_all_cookies
 
-    #Loading env settings into global variables
-    selected_env_info = @env_info[@env]
-    URL = selected_env_info['url']
-    USER = selected_env_info['usr']
-    PWD = selected_env_info['pwd']
-
-    puts URL
-    puts USER
-    puts PWD
-
     #All page-objects initialization here
     @login = Login.new($browser)
     @header = Header.new($browser)
     @home = Home.new($browser)
-
 end
 
 Before ('not @auto_login_logout') do

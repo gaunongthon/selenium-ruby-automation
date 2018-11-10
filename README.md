@@ -50,7 +50,7 @@ Dowload web drivers on your machine.
 * Firefox: https://github.com/mozilla/geckodriver/releases/
 * Chrome: http://chromedriver.storage.googleapis.com/index.html
 
-Install chromedriver if not available 
+Install chromedriver if not available
 ```
 mkdir ~/downloads
 cd ~/downloads
@@ -80,7 +80,7 @@ which chromedriver
 chromedriver -version
 ```
 
-Install google-chrome if not available 
+Install google-chrome if not available
 ```
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i ./google-chrome*.deb
@@ -136,12 +136,12 @@ cucumber -p wip -p ff
 
 run feature_name.feature on default env against default browser but not features with @skip
 ```
-cucumber -p headless features/feature_name.feature
+cucumber -p headless features/SignInOut.feature
 ```
 
 run feature_name.feature on default env against ff browser but not features with @skip
 ```
-cucumber features/feature_name.feature -p ff
+cucumber features/SignInOut.feature -p ff
 ```
 
 ### How do I view test report? ###
