@@ -13,8 +13,8 @@ module UtilFunctions
   end
 
   def wait_for_transition(element)
-      element.wait_until_present
-      FirePoll.poll('waited too long', 20) do
+      element.wait_until(&:present?)
+      FirePoll.poll('waited too long', TIMEOUT) do
         element.present?
       end
   end
