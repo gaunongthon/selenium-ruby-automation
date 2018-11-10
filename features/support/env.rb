@@ -17,20 +17,20 @@ require 'watir-scroll'
 require_all 'lib'
 
 ENV['FRAMEWORK'] = File.expand_path('.')
-
-    $env = ENV['ENVIRONMENT'] || 'qa'
-    @env_info = YAML.load(File.open(File.join(Dir.pwd, 'config', 'env.yml')))
+    env = ENV['ENVIRONMENT'] || 'qa'
+    @configs = YAML.load(File.open(File.join(Dir.pwd, 'config', 'env.yml')))
     $platform = ENV['PLATFORM'] || 'local'
-    puts "\nPlatform: #{$platform}"
-    puts "\nEnvironment: #{$env}"
-    $browserstackOptions = @env_info[$platform]
+    puts "PLATFORM: #{$platform}"
+    puts "ENVIRONMENT: #{env}"
+    $browserstackOptions = @configs[$platform]
 
     #Loading env settings into global variables
-    creds = @env_info[$env]
+    creds = @configs[env]
     URL = creds['url']
     USER = creds['usr']
     PWD = creds['pwd']
+    TIMEOUT = creds['timeout']
 
-    puts "\nURL: #{URL}"
-    puts "\nUSER: #{USER}"
-    puts "\nPWD: #{PWD}"
+    puts "URL: #{URL}"
+    puts "USER: #{USER}"
+    puts "PWD: #{PWD}"

@@ -33,7 +33,7 @@ Before do
       $browser_type = ENV['BROWSER']
       $browser = Watir::Browser.new :"#{$browser_type}"
     end
-    $browser.driver.manage.timeouts.implicit_wait = 120 # seconds
+    $browser.driver.manage.timeouts.implicit_wait = TIMEOUT
     $browser.driver.manage.window.maximize
     $browser.driver.manage.delete_all_cookies
 

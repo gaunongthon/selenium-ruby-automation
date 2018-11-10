@@ -10,6 +10,6 @@ Feature: Automation Practice Smoke test
 		And I log out Automation Practice
 
 		Examples:
-					| opt 		|
+					| opt |
 					|"My credit slips"|
 					|"My addresses"|
