@@ -23,8 +23,7 @@ Before do
       $browser = Watir::Browser.new(:remote,
         :url => url,
         :desired_capabilities => capabilities)
-    elsif ENV['BROWSER'].eql? 'headless'# For headless mode
-      require 'headless'
+    elsif ENV['BROWSER'].eql? 'headless'# For headless mode      
       puts "\nStarting headless"
       options = Selenium::WebDriver::Chrome::Options.new
       options.add_argument('--headless')
