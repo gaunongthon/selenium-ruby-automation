@@ -1,3 +1,5 @@
 Gemfile.lock
-reports/*
+reports/*.png
+reports/*.json
+reports/*.html
 .idea
