@@ -40,31 +40,20 @@ Before do
     @login = Login.new(@browser)
     @header = Header.new(@browser)
     @home = Home.new(@browser)
+
+    @login.loadAUT(URL)
 end
 
-Before ('not @auto_login_logout') do
-  @login.loadAUT(URL)
-end
-
-Before ('@auto_login_logout') do
-  @login.loadAUT(URL)
-  @login.login(USER, PWD)
-end
-
+# Do something after each scenario
 After do |scenario|
    if scenario.failed?
-    screenshot = "reports/fail_"+scenario.name+".png"
-    @browser.save_screenshot("reports/fail_"+scenario.name+".png")
-    embed("reports/fail_"+scenario.name+".png", 'image/png')
+     time = Time.new
+     time = time.hour.to_s + "_" + time.min.to_s
+     screenshot = "reports/fail_"+scenario.name+"_"+time+".png"
+     @browser.screenshot.save(screenshot)
+     embed(screenshot, 'image/png')
   end
-  @browser.quit
-end
-
-After '@auto_login_logout' do
-@header.logOut
-@browser.quit
-end
-
-After 'not @auto_login_logout' do
+  puts "\nClosing browser ..."
+  @browser.close
   @browser.quit
 end
