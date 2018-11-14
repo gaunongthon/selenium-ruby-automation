@@ -20,10 +20,12 @@ module UtilFunctions
   end
 
   def mouseOver(element)
+    wait_for_transition(element)
     element.fire_event "onmouseover"
   end
 
   def scrollElementToCenter(element)
+    wait_for_transition(element)
     element.scroll.to :center
   end
 
@@ -35,13 +37,11 @@ module UtilFunctions
   def clickElement(element)
       wait_for_transition(element)
       element.click
-      sleep(WAIT_DEFAULT)
   end
 
   def doubleClickElement(element)
     wait_for_transition(element)
     element.double_click
-    sleep(WAIT_DEFAULT)
   end
 
   def clickElementNoWait(element)
@@ -49,6 +49,7 @@ module UtilFunctions
   end
 
   def getElementAttr(elememt, attr)
+    wait_for_transition(element)
     case attr
       when "class"
         elememt.attribute_value("class")
@@ -57,7 +58,6 @@ module UtilFunctions
 
   def go(browser, url)
     browser.goto url
-    sleep(WAIT_DEFAULT)
   end
 
   # method to switch frame
