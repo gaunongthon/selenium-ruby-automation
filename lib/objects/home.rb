@@ -11,15 +11,14 @@ class Home
   end
 
   def returnToMyAccount
-    if (!(@home_my_account_text.text.downcase.eql? HOME_PAGE_WELCOME_TEXT))
+    if (!(getText(@home_my_account_text).downcase.eql? HOME_PAGE_WELCOME_TEXT))
       clickElement(@my_account)
     end
   end
 
   def select_managed_option(selectedOption)
     @managed_options.each do |item|
-      if item.text.eql? selectedOption
-        puts item.text
+      if getText(item).eql? selectedOption
         clickElement(item)
       end
     end

@@ -13,10 +13,9 @@ module UtilFunctions
   end
 
   def wait_for_transition(element)
-      element.wait_until(&:present?)
-      FirePoll.poll('waited too long', TIMEOUT) do
-        element.present?
-      end
+    FirePoll.poll('waited too long', TIMEOUT) do
+      element.present?
+    end
   end
 
   def mouseOver(element)
@@ -48,7 +47,12 @@ module UtilFunctions
       element.click
   end
 
-  def getElementAttr(elememt, attr)
+  def getText(element)
+    wait_for_transition(element)
+    return element.text;
+  end
+
+  def getElementAttr(element, attr)
     wait_for_transition(element)
     case attr
       when "class"

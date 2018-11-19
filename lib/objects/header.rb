@@ -13,24 +13,14 @@ class Header
 
   def logOut
     clickElement(@logout)
-    wait_for_page_to_complete
   end
 
   def clickContactUs
     clickElement(@contact_us)
-    wait_for_page_to_complete
   end
 
   def clickMyAccount
     clickElement(@myaccount)
-    wait_for_page_to_complete
-  end
-
-  private
-  def wait_for_page_to_complete(timeout = 20)
-    FirePoll.poll("Page was not loaded", timeout) do
-      @b.execute_script("return document.readyState;") == "complete"
-    end
   end
 
 end
